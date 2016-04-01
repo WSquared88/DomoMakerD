@@ -8,17 +8,7 @@ block body
     .navlink
       a(href="/logout") Log out
     .navlink
-      a(href="/view") All Domos
-  section#makeDomo
-    form#domoForm(class="domoForm", name="domoForm", action="/maker", method="POST")
-      label(for="name") Name: 
-      input#domoName(type="text", name="name", placeholder="Domo Name")
-      label(for="age") Age: 
-      input#domoAge(type="text", name="age", placeholder="Domo Age")
-      label(for="Color") Color:
-      input#domoColor(type="text", name="color", placeholder="Domo Color")
-      input(type="hidden", name="_csrf", value="#{csrfToken}")
-      a#makeDomoSubmit(class="makeDomoSubmit", href="#") Make Domo
+      a(href="/maker") Your Domos
   section#domos
     if !domos || domos.length == 0
         div.domo

@@ -24,11 +24,11 @@ var makerPage = function(req, res)
 
 var makeDomo = function(req, res)
 {
-	if(!req.body.name || !req.body.age)
+	if(!req.body.name || !req.body.age || !req.body.name)
 	{
 		return res.status(400).json(
 		{
-			error: "RAWR! Both name and age are required"
+			error: "RAWR! name, age, and color are required"
 		});
 	}
 	
@@ -36,6 +36,7 @@ var makeDomo = function(req, res)
 	{
 		name: req.body.name,
 		age: req.body.age,
+		color: req.body.color,
 		owner: req.session.account._id
 	};
 	
@@ -59,5 +60,26 @@ var makeDomo = function(req, res)
 	});
 };
 
+var viewPage = function(req, res)
+{
+	Domo.DomoModel.findAll(req.session.account._id, function(err, docs)
+	{
+		if(err)
+		{
+			console.log(err);
+			return res.status(400).json(
+			{
+				error: "An error occured"
+			});
+		}
+		
+		res.render("view", 
+		{
+			domos: docs
+		});
+	});
+};
+
 module.exports.makerPage = makerPage;
 module.exports.make = makeDomo;
+module.exports.viewPage = viewPage;
